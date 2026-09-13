@@ -1,0 +1,609 @@
+<!doctype html>
+<title>Encaissly</title>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root{
+    --paper:#EFEAF9;
+    --paper-raised:#FFFFFF;
+    --paper-sunken:#E4DDF4;
+    --ink:#1B1523;
+    --ink-soft:#655D74;
+    --ink-faint:#9089A0;
+    --line:#DCD3F0;
+    --accent:#7A41BB;
+    --accent-deep:#5A2E8A;
+    --accent-soft:#B98AE0;
+    --yellow:#F7CE3E;
+    --pink:#F2529E;
+    --shadow: 0 10px 30px -12px rgba(90,46,138,0.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171120;
+      --paper-raised:#231A32;
+      --paper-sunken:#120D1A;
+      --ink:#F3EEFB;
+      --ink-soft:#C2B6D9;
+      --ink-faint:#8B7FA3;
+      --line:#3B2C55;
+      --accent:#B489EA;
+      --accent-deep:#D8B8FA;
+      --accent-soft:#7A5CA8;
+      --yellow:#F7CE3E;
+      --pink:#FF6FB0;
+      --shadow: 0 10px 34px -12px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171120;
+    --paper-raised:#231A32;
+    --paper-sunken:#120D1A;
+    --ink:#F3EEFB;
+    --ink-soft:#C2B6D9;
+    --ink-faint:#8B7FA3;
+    --line:#3B2C55;
+    --accent:#B489EA;
+    --accent-deep:#D8B8FA;
+    --accent-soft:#7A5CA8;
+    --yellow:#F7CE3E;
+    --pink:#FF6FB0;
+    --shadow: 0 10px 34px -12px rgba(0,0,0,0.55);
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Karla',ui-sans-serif,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body > *{ padding-inline: max(20px, calc((100% - 1040px)/2)); }
+  h1,h2,h3{
+    font-family:'Bricolage Grotesque', ui-sans-serif, sans-serif;
+    font-weight:800;
+    text-wrap:balance;
+    margin:0;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+  }
+  p{ margin:0; line-height:1.6; }
+  a{ color:inherit; }
+  .mono{ font-family:'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px; font-weight:600; letter-spacing:0.11em; text-transform:uppercase;
+    color:var(--accent-deep);
+  }
+
+  /* ---------- stamp ticket ---------- */
+  .stamp{
+    display:inline-block;
+    padding:7px 14px;
+    border:1.5px dashed var(--accent-soft);
+    border-radius:999px;
+    transform:rotate(-2.5deg);
+    background:var(--paper-raised);
+    color:var(--accent-deep);
+  }
+
+  /* ---------- header ---------- */
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block:22px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{
+    width:34px; height:34px; border-radius:9px;
+    border:2px solid var(--ink);
+    background:linear-gradient(160deg, var(--yellow) 0%, var(--pink) 52%, var(--accent) 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Bricolage Grotesque'; font-weight:800; font-size:19px; color:var(--ink);
+    flex-shrink:0;
+  }
+  .brand-word{ font-family:'Bricolage Grotesque'; font-weight:800; font-size:19px; }
+  .brand-word span{ text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; font-weight:500; }
+  .nav-cta{
+    font-family:'JetBrains Mono', monospace; font-size:13px; font-weight:600;
+    padding:9px 16px; border-radius:999px; border:1.5px solid var(--ink);
+    text-decoration:none; white-space:nowrap;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-block: 40px 56px;
+    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:44px; align-items:center;
+  }
+  .hero h1{ font-size:clamp(32px,5vw,50px); margin-top:16px; }
+  .underline{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M2 10 C 40 2, 80 14, 120 6 S 180 2, 198 8' stroke='%23F2529E' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:0 88%; background-size:100% 42%;
+    padding:0 2px;
+  }
+  .hero p.lead{ margin-top:18px; font-size:17px; color:var(--ink-soft); max-width:46ch; }
+  .hero-ctas{ display:flex; gap:14px; align-items:center; margin-top:26px; flex-wrap:wrap; }
+  .btn-primary{
+    font-family:'Bricolage Grotesque'; font-weight:700; font-size:15.5px;
+    background:var(--ink); color:var(--paper);
+    padding:14px 24px; border-radius:12px; text-decoration:none;
+    border:2px solid var(--ink);
+    box-shadow: var(--shadow);
+  }
+  :root[data-theme="dark"] .btn-primary, @media (prefers-color-scheme:dark){ }
+  .btn-ghost{
+    font-family:'JetBrains Mono'; font-size:13.5px; font-weight:600; color:var(--ink-soft);
+    text-decoration:none; border-bottom:1.5px dashed var(--ink-faint); padding-bottom:2px;
+  }
+
+  /* ---------- receipt ---------- */
+  .receipt-wrap{ display:flex; justify-content:center; }
+  .receipt{
+    width:100%; max-width:340px;
+    background:var(--paper-raised);
+    border:2px solid var(--ink);
+    border-bottom:none;
+    border-radius:14px 14px 0 0;
+    padding:20px 20px 16px;
+    transform:rotate(2deg);
+    box-shadow: var(--shadow);
+    position:relative;
+  }
+  .receipt-head{ display:flex; justify-content:space-between; align-items:baseline; }
+  .receipt-title{ font-family:'Bricolage Grotesque'; font-weight:800; font-size:14px; letter-spacing:0.02em; }
+  .receipt-sub{ font-family:'JetBrains Mono'; font-size:10.5px; color:var(--ink-faint); }
+  .receipt hr{ border:none; border-top:1.5px dashed var(--line); margin:13px 0; }
+  .r-line{ margin-bottom:13px; }
+  .r-row{ display:flex; justify-content:space-between; gap:10px; font-weight:700; font-size:14.5px; }
+  .r-meta{ display:flex; justify-content:space-between; font-family:'JetBrains Mono'; font-size:10.5px; color:var(--ink-faint); margin-top:3px; }
+  .r-net{ color:var(--accent-deep); }
+  .r-total{ display:flex; justify-content:space-between; font-family:'JetBrains Mono'; font-weight:700; font-size:13px; margin-top:2px; }
+  .zigzag{
+    height:14px; margin:0 -2px;
+    background:
+      linear-gradient(135deg, var(--paper) 50%, transparent 50%) 0 0/14px 14px repeat-x,
+      linear-gradient(-135deg, var(--paper) 50%, transparent 50%) 0 0/14px 14px repeat-x;
+  }
+
+  /* ---------- section shell ---------- */
+  section{ padding-block:56px; border-top:1.5px solid var(--line); }
+  .section-head{ max-width:56ch; margin-bottom:34px; }
+  .section-head h2{ font-size:clamp(24px,3.4vw,32px); margin-top:10px; }
+  .section-head p{ margin-top:12px; color:var(--ink-soft); font-size:15.5px; }
+
+  /* ---------- problem ---------- */
+  .problem{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
+  .problem p{ color:var(--ink-soft); font-size:15.5px; max-width:48ch; }
+  .problem p + p{ margin-top:14px; }
+  .ledger{
+    background:
+      repeating-linear-gradient(var(--paper-raised), var(--paper-raised) 27px, var(--line) 28px);
+    border:2px solid var(--ink); border-radius:12px; padding:18px 20px; position:relative;
+    font-family:'JetBrains Mono'; font-size:12.5px; color:var(--ink-soft);
+    transform:rotate(-1.4deg);
+  }
+  .ledger .strike{ text-decoration:line-through; text-decoration-color:var(--pink); text-decoration-thickness:2px; color:var(--ink-faint); }
+  .ledger .fix{ color:var(--accent-deep); font-weight:700; }
+
+  /* ---------- features ---------- */
+  .feature-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  .feature{
+    background:var(--paper-raised); border:2px solid var(--ink); border-radius:14px;
+    padding:20px; position:relative;
+  }
+  .feature svg{ width:26px; height:26px; stroke:var(--accent-deep); }
+  .feature h3{ font-size:16.5px; margin-top:14px; }
+  .feature p{ margin-top:8px; font-size:13.8px; color:var(--ink-soft); }
+  .feature .tag{
+    position:absolute; top:16px; right:16px;
+    font-family:'JetBrains Mono'; font-size:10px; color:var(--ink-faint);
+  }
+
+  /* ---------- screens ---------- */
+  .roles{ display:flex; flex-direction:column; gap:52px; }
+  .role-row{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
+  .role-row.flip{ grid-template-columns:0.9fr 1.1fr; }
+  .role-row.flip .role-text{ order:2; }
+  .role-text h3{ font-size:21px; margin-top:10px; }
+  .role-text .who{ margin-top:16px; }
+  .role-text .who b{ font-family:'JetBrains Mono'; font-size:10.5px; text-transform:uppercase; letter-spacing:0.07em; color:var(--accent-deep); display:block; margin-bottom:4px; }
+  .role-text .who p{ font-size:14px; color:var(--ink-soft); }
+  .role-text .who + .who{ margin-top:14px; }
+  .role-phone-wrap{ display:flex; justify-content:center; }
+  .segctrl{ display:flex; background:var(--paper-sunken); border-radius:999px; padding:3px; margin-bottom:9px; }
+  .segctrl div{ flex:1; text-align:center; font-family:'JetBrains Mono'; font-size:8px; font-weight:700; padding:5px 0; border-radius:999px; color:var(--ink-faint); }
+  .segctrl div.on{ background:var(--paper-raised); color:var(--accent-deep); box-shadow:0 1px 3px rgba(0,0,0,0.12); }
+  .screens{ display:grid; grid-template-columns:repeat(2,1fr); gap:26px; justify-items:center; }
+  .phone{
+    width:230px; border:2.5px solid var(--ink); border-radius:26px; overflow:hidden;
+    background:var(--paper-sunken); box-shadow:var(--shadow);
+  }
+  .phone-bar{ background:var(--paper-raised); padding:12px 14px 9px; border-bottom:1.5px solid var(--line); text-align:center; }
+  .phone-greet{ font-size:9.5px; color:var(--ink-faint); }
+  .phone-name{ font-size:12px; font-weight:700; letter-spacing:0.02em; }
+  .phone-badge{
+    display:inline-block; margin-top:5px; font-family:'JetBrains Mono'; font-size:8px; font-weight:700;
+    background:var(--accent); color:#fff; padding:2px 8px; border-radius:8px;
+  }
+  .phone-body{ padding:11px; }
+  .phone-label{ font-family:'JetBrains Mono'; font-size:7.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:6px; }
+  .phone-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:10px; }
+  .phone-card{ background:var(--paper-raised); border:1.3px solid var(--line); border-radius:8px; padding:7px 8px; }
+  .phone-card .l{ font-size:7.5px; color:var(--ink-faint); }
+  .phone-card .v{ font-size:12px; font-weight:700; }
+  .phone-row{ display:flex; justify-content:space-between; align-items:center; background:var(--paper-raised); border:1.3px solid var(--line); border-radius:8px; padding:7px 9px; margin-bottom:5px; }
+  .phone-row .n{ font-size:9.5px; font-weight:700; }
+  .phone-row .m{ font-size:7.5px; color:var(--ink-faint); }
+  .phone-row .p{ font-size:10.5px; font-weight:700; color:var(--accent-deep); font-family:'JetBrains Mono'; }
+  .phone-tabs{ display:flex; background:var(--paper-raised); border-top:1.3px solid var(--line); padding:6px 0; }
+  .phone-tabs div{ flex:1; text-align:center; font-size:6.5px; color:var(--ink-faint); font-family:'JetBrains Mono'; }
+  .phone-tabs div.on{ color:var(--accent); font-weight:700; }
+  .phone-cash{ display:flex; align-items:center; gap:5px; background:var(--paper-sunken); border-radius:7px; padding:5px 8px; margin-bottom:8px; }
+  .phone-cash input{ pointer-events:none; }
+  .phone-cash span{ font-size:8px; color:var(--accent-deep); font-weight:600; }
+  .screen-label{ font-family:'JetBrains Mono'; font-size:11px; color:var(--ink-faint); margin-top:12px; text-align:center; }
+
+  /* ---------- plans ---------- */
+  .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .plan{
+    background:var(--paper-raised); border:2px solid var(--ink); border-radius:14px; padding:22px 20px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .plan.pro{ border-color:var(--accent); box-shadow:var(--shadow); }
+  .plan-name{ font-family:'Bricolage Grotesque'; font-weight:800; font-size:17px; }
+  .plan-price{ font-family:'JetBrains Mono'; font-size:13px; color:var(--ink-soft); }
+  .plan ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; font-size:13.3px; }
+  .plan li{ display:flex; gap:8px; color:var(--ink-soft); }
+  .plan li b{ color:var(--ink); font-weight:600; }
+  .plan-note{
+    margin-top:auto; font-family:'JetBrains Mono'; font-size:10.5px; color:var(--accent-deep);
+    background:var(--paper-sunken); border-radius:8px; padding:8px 10px;
+  }
+
+  /* ---------- cta ---------- */
+  .cta-box{
+    background:var(--ink); color:var(--paper);
+    border-radius:20px; padding:40px 34px;
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:30px; align-items:center;
+    position:relative; overflow:hidden;
+  }
+  .cta-box::before{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(120deg, var(--yellow) 0%, var(--pink) 45%, var(--accent) 100%);
+    opacity:0.14;
+  }
+  .cta-box > *{ position:relative; }
+  .cta-box .eyebrow{ color:var(--yellow); }
+  .cta-box h2{ color:var(--paper); font-size:clamp(22px,3vw,30px); margin-top:10px; }
+  .cta-box p{ color:#D8CEEE; margin-top:12px; font-size:14.5px; max-width:44ch; }
+  .cta-steps{ display:flex; flex-direction:column; gap:12px; font-family:'JetBrains Mono'; font-size:12.5px; }
+  .cta-steps div{ display:flex; gap:10px; align-items:baseline; }
+  .cta-steps b{ color:var(--yellow); }
+  .cta-box .btn-primary{ background:var(--paper); color:var(--ink); border-color:var(--paper); margin-top:18px; display:inline-block; }
+
+  /* ---------- footer ---------- */
+  footer{
+    padding-block:30px 40px; border-top:1.5px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    font-family:'JetBrains Mono'; font-size:12px; color:var(--ink-faint);
+  }
+  footer a{ color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; }
+
+  @media (max-width:760px){
+    .hero{ grid-template-columns:1fr; }
+    .hero-ctas{ flex-direction:column; align-items:flex-start; }
+    .problem{ grid-template-columns:1fr; }
+    .feature-grid{ grid-template-columns:1fr; }
+    .screens{ grid-template-columns:1fr; }
+    .plans{ grid-template-columns:1fr; }
+    .cta-box{ grid-template-columns:1fr; padding:28px 22px; }
+  }
+</style>
+
+<header>
+  <div class="brand">
+    <div class="brand-mark">E</div>
+    <div class="brand-word">Enc<span>aissly</span></div>
+  </div>
+  <a class="nav-cta" href="#rejoindre">Rejoindre le test →</a>
+</header>
+
+<section class="hero" style="border-top:none; padding-top:8px;">
+  <div>
+    <span class="stamp eyebrow">● Test fermé · Android</span>
+    <h1>Chaque vente, sa <span class="underline">bonne commission.</span></h1>
+    <p class="lead">Encaissly est la caisse des boutiques à plusieurs créatrices : chaque vente est rattachée à la bonne créatrice, sa commission calculée toute seule — carte ou espèces — et les comptes sortent sans tableur en fin de mois.</p>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="mailto:contact.encaissly@gmail.com?subject=Je%20veux%20tester%20Encaissly&body=Salut%2C%20je%20suis%20cr%C3%A9atrice%2Fg%C3%A9rante%20de%20boutique%20et%20j%E2%80%99aimerais%20tester%20Encaissly%20!">Je veux tester →</a>
+      <a class="btn-ghost" href="#comment-ca-marche">Voir comment ça marche</a>
+    </div>
+  </div>
+  <div class="receipt-wrap">
+    <div>
+      <div class="receipt">
+        <div class="receipt-head">
+          <div class="receipt-title">REÇU DE VENTE</div>
+          <div class="receipt-sub">Boutique Lamartine</div>
+        </div>
+        <hr>
+        <div class="r-line">
+          <div class="r-row"><span>Collier argent plaqué or</span><span class="mono">45,00 €</span></div>
+          <div class="r-meta"><span>Sophie · Carte · comm. 25%</span><span>−11,25 €</span></div>
+          <div class="r-total"><span>Net créatrice</span><span class="r-net">33,75 €</span></div>
+        </div>
+        <hr>
+        <div class="r-line">
+          <div class="r-row"><span>Bracelet perles</span><span class="mono">35,00 €</span></div>
+          <div class="r-meta"><span>Sophie · Espèces · 0% forcé</span><span>−0,00 €</span></div>
+          <div class="r-total"><span>Net créatrice</span><span class="r-net">35,00 €</span></div>
+        </div>
+      </div>
+      <div class="zigzag"></div>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div>
+    <span class="eyebrow">Avant Encaissly</span>
+    <h2 style="margin-top:10px; font-size:26px;">Le calcul de commission, à la main, tous les soirs.</h2>
+    <p>Trois créatrices sur le même comptoir, trois taux de commission différents, des espèces que certaines ne commissionnent pas — et tout ça recopié le soir dans un tableur, en espérant ne pas se tromper de ligne.</p>
+    <p>Encaissly fait ce calcul au moment de la vente, pour chaque créatrice, sur chaque mode de paiement — et le garde, modifiable si tu te trompes de prix ou de nom.</p>
+  </div>
+  <div class="ledger">
+    Collier argent .......... 45,00€ <span class="strike">× 0,20</span> <span class="fix">× 0,25 ✓</span><br>
+    Bracelet perles .......... 35,00€ <span class="strike">× 0,25</span> <span class="fix">esp. 0% ✓</span><br>
+    Boucle dorée .......... 22,00€ <span class="strike">× ???</span> <span class="fix">× 0,25 ✓</span><br>
+    <br>
+    Total créatrice .......... <span class="fix">102,00€ net</span>
+  </div>
+</section>
+
+<section id="comment-ca-marche">
+  <div class="section-head">
+    <span class="eyebrow">Comment ça marche</span>
+    <h2>Ce qu'Encaissly fait à ta place.</h2>
+  </div>
+  <div class="feature-grid">
+    <div class="feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="M18 6 6 18"/></svg>
+      <span class="tag">01</span>
+      <h3>Chaque créatrice, son taux</h3>
+      <p>Le taux de commission se règle par créatrice dans la boutique — le calcul suit automatiquement à chaque vente.</p>
+    </div>
+    <div class="feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 12h6M9 16h4"/></svg>
+      <span class="tag">02</span>
+      <h3>Espèces à 0% en un tap</h3>
+      <p>Une case à cocher au moment du règlement en espèces : commission normale, ou 0% pour cette vente-là uniquement.</p>
+    </div>
+    <div class="feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M4 10h16M8 3v5M16 3v5"/></svg>
+      <span class="tag">03</span>
+      <h3>Un événement, son propre suivi</h3>
+      <p>Marché, foire, pop-up : une créatrice crée son événement, y ajoute son stock article par article, et retrouve ses ventes filtrées événement par événement.</p>
+    </div>
+    <div class="feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 19V9M11 19V5M18 19v-7"/></svg>
+      <span class="tag">04</span>
+      <h3>Stats et export en fin de mois</h3>
+      <p>CA, historique, top articles — et un export PDF, Excel ou CSV prêt pour la compta.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="eyebrow">Trois façons de l'utiliser</span>
+    <h2>Une appli, trois quotidiens différents.</h2>
+    <p>Encaissly s'adapte à qui tient le compte : une créatrice seule, une gérante qui pilote plusieurs créatrices, ou une seule personne qui fait les deux.</p>
+  </div>
+
+  <div class="roles">
+
+    <div class="role-row">
+      <div class="role-text">
+        <span class="eyebrow">Côté créatrice</span>
+        <h3>Vendre, et savoir combien il te reste.</h3>
+        <div class="who">
+          <b>Pourquoi</b>
+          <p>Tu vends tes propres créations, seule ou dans une ou plusieurs boutiques partagées. Ce qui compte : combien tu as vendu, ce que la boutique prend en commission, et combien il te reste net — sans recalculer chaque ligne à la main.</p>
+        </div>
+        <div class="who">
+          <b>Comment</b>
+          <p>Tu notes chaque vente (article, prix, mode de paiement). Si tu es affiliée à une boutique, l'onglet Boutique montre uniquement tes ventes à toi, faites là-bas — jamais celles d'une autre créatrice.</p>
+        </div>
+        <div class="who">
+          <b>Et sur un marché ou un salon</b>
+          <p>Tu crées un événement (dates de début et de fin), tu y ajoutes ton stock article par article, et tu retrouves ensuite tes ventes filtrées pour cet événement précis — séparément de tes ventes en boutique.</p>
+        </div>
+      </div>
+      <div class="role-phone-wrap">
+        <div>
+          <div class="phone">
+            <div class="phone-bar">
+              <div class="phone-greet">Marché de Noël 🏷️</div>
+              <div class="phone-name">SOPHIE MARTIN</div>
+              <span class="phone-badge">14 → 15 déc.</span>
+            </div>
+            <div class="phone-body">
+              <div class="phone-label">Bilan de l'événement</div>
+              <div class="phone-grid">
+                <div class="phone-card"><div class="l">Ventes</div><div class="v">9</div></div>
+                <div class="phone-card"><div class="l">CA</div><div class="v">265 €</div></div>
+              </div>
+              <div class="phone-label">Stock restant</div>
+              <div class="phone-row"><div><div class="n">Collier argent</div><div class="m">apporté : 12</div></div><div class="p">3 restants</div></div>
+              <div class="phone-row"><div><div class="n">Bracelet perles</div><div class="m">apporté : 8</div></div><div class="p" style="color:var(--pink);">épuisé</div></div>
+            </div>
+            <div class="phone-tabs">
+              <div>Dashboard</div><div>Ventes</div><div class="on">Événements</div><div>Stats</div>
+            </div>
+          </div>
+          <div class="screen-label">Fiche événement — stock &amp; ventes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="role-row flip">
+      <div class="role-text">
+        <span class="eyebrow">Côté gérante</span>
+        <h3>Piloter la boutique, créatrice par créatrice.</h3>
+        <div class="who">
+          <b>Pourquoi</b>
+          <p>Plusieurs créatrices vendent dans ta boutique, chacune avec son propre taux de commission. En fin de mois il faut reverser le bon montant net à chacune, et sortir un export propre pour la compta.</p>
+        </div>
+        <div class="who">
+          <b>Comment</b>
+          <p>Tu ajoutes chaque créatrice avec son taux, tu suis le CA global et le détail par créatrice, et tu exportes en PDF, Excel ou CSV.</p>
+        </div>
+      </div>
+      <div class="role-phone-wrap">
+        <div>
+          <div class="phone">
+            <div class="phone-bar">
+              <div class="phone-greet">Bonjour 👋</div>
+              <div class="phone-name">MARIE DUPONT</div>
+              <span class="phone-badge">GÉRANTE · PRO</span>
+            </div>
+            <div class="phone-body">
+              <div class="phone-label">Boutique Lamartine</div>
+              <div class="phone-grid">
+                <div class="phone-card"><div class="l">CA boutique</div><div class="v">850 €</div></div>
+                <div class="phone-card"><div class="l">Ventes</div><div class="v">18</div></div>
+                <div class="phone-card"><div class="l">Commissions</div><div class="v">212 €</div></div>
+                <div class="phone-card"><div class="l">Créatrices</div><div class="v">4</div></div>
+              </div>
+              <div class="phone-label">Dernières ventes</div>
+              <div class="phone-row"><div><div class="n">Boucle dorée</div><div class="m">Sophie · Carte</div></div><div class="p">45 €</div></div>
+              <div class="phone-row"><div><div class="n">Collier argent</div><div class="m">Léa · Espèces</div></div><div class="p">80 €</div></div>
+            </div>
+            <div class="phone-tabs">
+              <div class="on">Dashboard</div><div>Ventes</div><div>Créatrices</div><div>Stats</div>
+            </div>
+          </div>
+          <div class="screen-label">Dashboard gérante</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="role-row">
+      <div class="role-text">
+        <span class="eyebrow">Côté gérante + créatrice</span>
+        <h3>Ta boutique, et tes propres ventes dedans.</h3>
+        <div class="who">
+          <b>Pourquoi</b>
+          <p>Tu gères ta boutique ET tu y vends tes propres créations — un profil courant chez les créatrices qui ouvrent leur atelier-boutique. Il te faut les deux casquettes sur un seul compte, sans rien payer deux fois.</p>
+        </div>
+        <div class="who">
+          <b>Comment</b>
+          <p>Un bouton bascule l'affichage entre vue gérante et vue créatrice, sur le même compte. Le plan DUO débloque exactement ce que Pro débloque, des deux côtés.</p>
+        </div>
+        <div class="who">
+          <b>Et côté créatrice, justement</b>
+          <p>En vue créatrice, tu es une créatrice comme les autres : tu peux créer tes propres événements (marché, salon) avec leur stock, et tu suis tes ventes faites dans ta propre boutique — en plus de la piloter côté gérante.</p>
+        </div>
+      </div>
+      <div class="role-phone-wrap">
+        <div>
+          <div class="phone">
+            <div class="phone-bar">
+              <div class="phone-greet">Bonjour 👋</div>
+              <div class="phone-name">CAMILLE ROUX</div>
+              <span class="phone-badge">GÉRANTE + CRÉATRICE · DUO</span>
+            </div>
+            <div class="phone-body">
+              <div class="segctrl"><div>Vue gérante</div><div class="on">Vue créatrice</div></div>
+              <div class="phone-label">Tes ventes ce mois-ci</div>
+              <div class="phone-grid">
+                <div class="phone-card"><div class="l">CA</div><div class="v">610 €</div></div>
+                <div class="phone-card"><div class="l">Ventes</div><div class="v">14</div></div>
+                <div class="phone-card"><div class="l">Commission</div><div class="v">0 €</div></div>
+                <div class="phone-card"><div class="l">Net</div><div class="v">610 €</div></div>
+              </div>
+              <div class="phone-row"><div><div class="n">Boucle d'oreille</div><div class="m">Carte</div></div><div class="p">28 €</div></div>
+              <div class="phone-row"><div><div class="n">Sac tissé</div><div class="m">Espèces</div></div><div class="p">55 €</div></div>
+            </div>
+            <div class="phone-tabs">
+              <div class="on">Dashboard</div><div>Ventes</div><div>Créatrices</div><div>Stats</div>
+            </div>
+          </div>
+          <div class="screen-label">Dashboard DUO — vue créatrice active</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="eyebrow">Formules</span>
+    <h2>Gratuit pour commencer, Pro quand ça grandit.</h2>
+  </div>
+  <div class="plans">
+    <div class="plan">
+      <div>
+        <div class="plan-name">Gratuit</div>
+        <div class="plan-price">0 €</div>
+      </div>
+      <ul>
+        <li>1 boutique</li>
+        <li>3 créatrices max</li>
+        <li>1 événement créatrice</li>
+        <li>Stats du mois en cours</li>
+        <li>1 export PDF filigrané / mois</li>
+      </ul>
+    </div>
+    <div class="plan pro">
+      <div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">9 €/mois · 79 €/an</div>
+      </div>
+      <ul>
+        <li><b>Créatrices illimitées</b></li>
+        <li><b>Multi-boutiques</b></li>
+        <li>Événements illimités</li>
+        <li>Historique complet (3 mois) + stats avancées</li>
+        <li>Export PDF/Excel/CSV illimité, sans filigrane</li>
+        <li>Récap mensuel automatique par email</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <div>
+        <div class="plan-name">Duo</div>
+        <div class="plan-price">15 €/mois · 129 €/an</div>
+      </div>
+      <ul>
+        <li>Pour un compte gérante + créatrice</li>
+        <li>Bascule d'affichage libre</li>
+        <li>Tout ce que Pro débloque</li>
+      </ul>
+      <div class="plan-note">= exactement Pro, des deux côtés du compte.</div>
+    </div>
+  </div>
+</section>
+
+<section id="rejoindre" style="border-top:none;">
+  <div class="cta-box">
+    <div>
+      <span class="eyebrow">12 places · test fermé</span>
+      <h2>On lance le test avec de vraies boutiques.</h2>
+      <p>L'appli n'est pas encore sur le Play Store — l'installation se fait par un lien direct, en 2 minutes. Écris-moi et je t'envoie tout.</p>
+      <a class="btn-primary" href="mailto:contact.encaissly@gmail.com?subject=Je%20veux%20tester%20Encaissly&body=Salut%2C%20je%20suis%20cr%C3%A9atrice%2Fg%C3%A9rante%20de%20boutique%20et%20j%E2%80%99aimerais%20tester%20Encaissly%20!">Je veux tester →</a>
+    </div>
+    <div class="cta-steps">
+      <div><b>1.</b><span>Tu m'écris à contact.encaissly@gmail.com</span></div>
+      <div><b>2.</b><span>Je t'envoie le lien d'installation Android</span></div>
+      <div><b>3.</b><span>Tu testes, tu me dis ce qui coince</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Encaissly © 2026 — fait pour les boutiques à plusieurs créatrices.</div>
+  <div><a href="mailto:contact.encaissly@gmail.com">contact.encaissly@gmail.com</a></div>
+</footer>
