@@ -294,25 +294,72 @@
 
   @media (max-width:760px){
     header{ flex-wrap:wrap; gap:12px; }
-    .hero{ grid-template-columns:1fr; padding-block:24px 40px; }
-    .hero-ctas{ flex-direction:column; align-items:flex-start; }
-    .problem{ grid-template-columns:1fr; gap:26px; }
-    .ledger{ transform:none; }
-    .feature-grid{ grid-template-columns:1fr; }
-    .roles{ gap:40px; }
-    .role-row, .role-row.flip{ grid-template-columns:1fr; gap:22px; }
-    .role-row.flip .role-text{ order:0; }
-    .screens{ grid-template-columns:1fr; }
-    .plans{ grid-template-columns:1fr; }
-    .cta-box{ grid-template-columns:1fr; padding:28px 22px; }
-  }
+    section{ padding-block:44px; }
+    .section-head p{ font-size:16px; }
 
-  @media (max-width:420px){
-    section{ padding-block:42px; }
-    .receipt{ padding:16px 16px 14px; }
-    .receipt-title{ font-size:12.5px; }
-    .r-row{ font-size:13px; }
-    .phone{ width:100%; max-width:230px; }
+    .hero{ grid-template-columns:1fr; padding-block:20px 36px; gap:30px; }
+    .hero p.lead{ font-size:17.5px; max-width:none; }
+    .hero-ctas{ flex-direction:column; align-items:stretch; }
+    .btn-primary{ text-align:center; font-size:17px; padding:16px 22px; }
+    .btn-ghost{ text-align:center; }
+
+    /* problem becomes one big bordered block */
+    .problem{
+      grid-template-columns:1fr; gap:20px;
+      background:var(--paper-raised); border:2px solid var(--ink); border-radius:18px;
+      padding:24px 20px; box-shadow:var(--shadow);
+    }
+    .problem h2{ font-size:23px; }
+    .problem p{ font-size:16px; max-width:none; }
+    .ledger{ transform:none; font-size:14px; padding:18px; }
+
+    .feature-grid{ grid-template-columns:1fr; gap:16px; }
+    .feature{ padding:22px; }
+    .feature svg{ width:30px; height:30px; }
+    .feature h3{ font-size:18.5px; margin-top:16px; }
+    .feature p{ font-size:15px; margin-top:10px; }
+
+    /* each role becomes one big bordered block, text + phone together */
+    .roles{ gap:26px; }
+    .role-row, .role-row.flip{
+      grid-template-columns:1fr; gap:24px;
+      background:var(--paper-raised); border:2px solid var(--ink); border-radius:18px;
+      padding:24px 20px; box-shadow:var(--shadow);
+    }
+    .role-row.flip .role-text{ order:0; }
+    .role-text h3{ font-size:22px; }
+    .role-text .who p{ font-size:15.5px; }
+    .role-phone-wrap{ margin-top:4px; }
+    .phone{ width:100%; max-width:280px; }
+    .phone-greet{ font-size:11px; }
+    .phone-name{ font-size:14px; }
+    .phone-badge{ font-size:9.5px; padding:3px 10px; }
+    .phone-body{ padding:14px; }
+    .phone-label{ font-size:9px; margin-bottom:8px; }
+    .phone-grid{ gap:8px; margin-bottom:12px; }
+    .phone-card{ padding:9px 10px; }
+    .phone-card .l{ font-size:9px; }
+    .phone-card .v{ font-size:15px; }
+    .phone-row{ padding:9px 11px; margin-bottom:7px; }
+    .phone-row .n{ font-size:12px; }
+    .phone-row .m{ font-size:9px; }
+    .phone-row .p{ font-size:13px; }
+    .phone-tabs div{ font-size:8.5px; }
+    .segctrl div{ font-size:9px; padding:6px 0; }
+    .screen-label{ font-size:12.5px; margin-top:14px; }
+
+    .plans{ grid-template-columns:1fr; gap:18px; }
+    .plan{ padding:26px 22px; }
+    .plan-name{ font-size:19px; }
+    .plan-price{ font-size:14.5px; }
+    .plan ul{ font-size:15px; gap:11px; }
+
+    .cta-box{ grid-template-columns:1fr; padding:28px 22px; }
+    .cta-box h2{ font-size:24px; }
+    .cta-box p{ font-size:15.5px; max-width:none; }
+    .cta-steps{ font-size:13.5px; }
+
+    footer{ flex-direction:column; align-items:flex-start; }
   }
 </style>
 
