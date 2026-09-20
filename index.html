@@ -2,7 +2,7 @@
 <title>Encaissly</title>
 <meta charset="utf-8">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600;700&display=swap');
 
   :root{
     --paper:#EFEAF9;
@@ -21,36 +21,26 @@
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#171120;
-      --paper-raised:#231A32;
-      --paper-sunken:#120D1A;
-      --ink:#F3EEFB;
-      --ink-soft:#C2B6D9;
-      --ink-faint:#8B7FA3;
-      --line:#3B2C55;
-      --accent:#B489EA;
-      --accent-deep:#D8B8FA;
-      --accent-soft:#7A5CA8;
-      --yellow:#F7CE3E;
-      --pink:#FF6FB0;
+      --paper:#171120; --paper-raised:#231A32; --paper-sunken:#120D1A;
+      --ink:#F3EEFB; --ink-soft:#C2B6D9; --ink-faint:#8B7FA3; --line:#3B2C55;
+      --accent:#B489EA; --accent-deep:#D8B8FA; --accent-soft:#7A5CA8;
+      --yellow:#F7CE3E; --pink:#FF6FB0;
       --shadow: 0 10px 34px -12px rgba(0,0,0,0.55);
     }
   }
   :root[data-theme="dark"]{
-    --paper:#171120;
-    --paper-raised:#231A32;
-    --paper-sunken:#120D1A;
-    --ink:#F3EEFB;
-    --ink-soft:#C2B6D9;
-    --ink-faint:#8B7FA3;
-    --line:#3B2C55;
-    --accent:#B489EA;
-    --accent-deep:#D8B8FA;
-    --accent-soft:#7A5CA8;
-    --yellow:#F7CE3E;
-    --pink:#FF6FB0;
+    --paper:#171120; --paper-raised:#231A32; --paper-sunken:#120D1A;
+    --ink:#F3EEFB; --ink-soft:#C2B6D9; --ink-faint:#8B7FA3; --line:#3B2C55;
+    --accent:#B489EA; --accent-deep:#D8B8FA; --accent-soft:#7A5CA8;
+    --yellow:#F7CE3E; --pink:#FF6FB0;
     --shadow: 0 10px 34px -12px rgba(0,0,0,0.55);
   }
+
+  /* ===================================================================
+     Mobile-first base. Everything below is the PHONE layout by default.
+     Desktop enhancements live in the single @media (min-width:760px) block
+     near the end — they widen/columnize, they never shrink mobile.
+     =================================================================== */
 
   *{ box-sizing:border-box; }
   body{
@@ -58,308 +48,210 @@
     background:var(--paper);
     color:var(--ink);
     font-family:'Karla',ui-sans-serif,system-ui,sans-serif;
+    font-size:16px;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  body > *{ padding-inline: max(20px, calc((100% - 1040px)/2)); }
+  body > *{ padding-inline: max(18px, calc((100% - 1100px)/2)); }
   h1,h2,h3{
     font-family:'Bricolage Grotesque', ui-sans-serif, sans-serif;
-    font-weight:800;
-    text-wrap:balance;
-    margin:0;
-    line-height:1.05;
-    letter-spacing:-0.01em;
+    font-weight:800; text-wrap:balance; margin:0; line-height:1.08; letter-spacing:-0.01em;
   }
   p{ margin:0; line-height:1.6; }
   a{ color:inherit; }
-  .mono{ font-family:'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .mono{ font-family:'JetBrains Mono', ui-monospace, monospace; font-variant-numeric:tabular-nums; }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px; font-weight:600; letter-spacing:0.11em; text-transform:uppercase;
-    color:var(--accent-deep);
+    font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:700;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-deep);
   }
 
-  /* ---------- stamp ticket ---------- */
   .stamp{
-    display:inline-block;
-    padding:7px 14px;
-    border:1.5px dashed var(--accent-soft);
-    border-radius:999px;
-    transform:rotate(-2.5deg);
-    background:var(--paper-raised);
-    color:var(--accent-deep);
+    display:inline-block; padding:8px 15px;
+    border:1.5px dashed var(--accent-soft); border-radius:999px;
+    background:var(--paper-raised); color:var(--accent-deep);
   }
 
   /* ---------- header ---------- */
-  header{
-    display:flex; align-items:center; justify-content:space-between;
-    padding-block:22px;
-  }
+  header{ display:flex; align-items:center; justify-content:space-between; padding-block:18px; gap:12px; flex-wrap:wrap; }
   .brand{ display:flex; align-items:center; gap:10px; }
   .brand-mark{
-    width:34px; height:34px; border-radius:9px;
-    border:2px solid var(--ink);
+    width:36px; height:36px; border-radius:10px; border:2px solid var(--ink); flex-shrink:0;
     background:linear-gradient(160deg, var(--yellow) 0%, var(--pink) 52%, var(--accent) 100%);
     display:flex; align-items:center; justify-content:center;
-    font-family:'Bricolage Grotesque'; font-weight:800; font-size:19px; color:var(--ink);
-    flex-shrink:0;
+    font-family:'Bricolage Grotesque'; font-weight:800; font-size:20px; color:var(--ink);
   }
-  .brand-word{ font-family:'Bricolage Grotesque'; font-weight:800; font-size:19px; }
+  .brand-word{ font-family:'Bricolage Grotesque'; font-weight:800; font-size:20px; }
   .brand-word span{ text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; font-weight:500; }
   .nav-cta{
-    font-family:'JetBrains Mono', monospace; font-size:13px; font-weight:600;
-    padding:9px 16px; border-radius:999px; border:1.5px solid var(--ink);
+    font-family:'JetBrains Mono', monospace; font-size:13.5px; font-weight:700;
+    padding:10px 16px; border-radius:999px; border:1.5px solid var(--ink);
     text-decoration:none; white-space:nowrap;
   }
 
   /* ---------- hero ---------- */
-  .hero{
-    padding-block: 40px 56px;
-    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:44px; align-items:center;
-  }
-  .hero h1{ font-size:clamp(32px,5vw,50px); margin-top:16px; }
+  .hero{ display:flex; flex-direction:column; gap:32px; padding-block:20px 40px; }
+  .hero h1{ font-size:clamp(32px,9vw,50px); margin-top:18px; }
   .underline{
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M2 10 C 40 2, 80 14, 120 6 S 180 2, 198 8' stroke='%23F2529E' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat:no-repeat; background-position:0 88%; background-size:100% 42%;
     padding:0 2px;
   }
-  .hero p.lead{ margin-top:18px; font-size:17px; color:var(--ink-soft); max-width:46ch; }
-  .hero-ctas{ display:flex; gap:14px; align-items:center; margin-top:26px; flex-wrap:wrap; }
+  .hero p.lead{ margin-top:18px; font-size:18px; color:var(--ink-soft); }
+  .hero-ctas{ display:flex; flex-direction:column; gap:12px; margin-top:26px; }
   .btn-primary{
-    font-family:'Bricolage Grotesque'; font-weight:700; font-size:15.5px;
+    font-family:'Bricolage Grotesque'; font-weight:700; font-size:17px; text-align:center;
     background:var(--ink); color:var(--paper);
-    padding:14px 24px; border-radius:12px; text-decoration:none;
-    border:2px solid var(--ink);
-    box-shadow: var(--shadow);
+    padding:16px 24px; border-radius:14px; text-decoration:none;
+    border:2px solid var(--ink); box-shadow:var(--shadow);
   }
-  :root[data-theme="dark"] .btn-primary, @media (prefers-color-scheme:dark){ }
   .btn-ghost{
-    font-family:'JetBrains Mono'; font-size:13.5px; font-weight:600; color:var(--ink-soft);
+    font-family:'JetBrains Mono'; font-size:14px; font-weight:600; color:var(--ink-soft);
     text-decoration:none; border-bottom:1.5px dashed var(--ink-faint); padding-bottom:2px;
+    text-align:center; align-self:center;
   }
 
-  /* ---------- receipt ---------- */
-  .receipt-wrap{ display:flex; justify-content:center; }
-  .receipt{
-    width:100%; max-width:340px;
-    background:var(--paper-raised);
-    border:2px solid var(--ink);
-    border-bottom:none;
-    border-radius:14px 14px 0 0;
-    padding:20px 20px 16px;
-    transform:rotate(2deg);
-    box-shadow: var(--shadow);
-    position:relative;
+  /* ---------- ticket (shared big-block component: hero receipt + role cards) ---------- */
+  .ticket{
+    width:100%; max-width:420px; margin-inline:auto;
+    background:var(--paper-raised); border:2px solid var(--ink);
+    border-bottom:none; border-radius:18px 18px 0 0;
+    padding:24px 22px 20px; box-shadow:var(--shadow); position:relative;
   }
-  .receipt-head{ display:flex; justify-content:space-between; align-items:baseline; }
-  .receipt-title{ font-family:'Bricolage Grotesque'; font-weight:800; font-size:14px; letter-spacing:0.02em; }
-  .receipt-sub{ font-family:'JetBrains Mono'; font-size:10.5px; color:var(--ink-faint); }
-  .receipt hr{ border:none; border-top:1.5px dashed var(--line); margin:13px 0; }
-  .r-line{ margin-bottom:13px; }
-  .r-row{ display:flex; justify-content:space-between; gap:10px; font-weight:700; font-size:14.5px; }
-  .r-meta{ display:flex; justify-content:space-between; font-family:'JetBrains Mono'; font-size:10.5px; color:var(--ink-faint); margin-top:3px; }
-  .r-net{ color:var(--accent-deep); }
-  .r-total{ display:flex; justify-content:space-between; font-family:'JetBrains Mono'; font-weight:700; font-size:13px; margin-top:2px; }
+  .ticket-head{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .ticket-title{ font-family:'Bricolage Grotesque'; font-weight:800; font-size:16px; letter-spacing:0.01em; }
+  .ticket-meta{ font-family:'JetBrains Mono'; font-size:12px; color:var(--ink-faint); }
+  .ticket hr{ border:none; border-top:1.5px dashed var(--line); margin:16px 0; }
+  .t-stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .t-stat{ background:var(--paper-sunken); border-radius:12px; padding:12px 14px; }
+  .t-stat .lbl{ font-family:'JetBrains Mono'; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); }
+  .t-stat .num{ font-family:'JetBrains Mono'; font-weight:700; font-size:clamp(20px,6vw,24px); margin-top:3px; }
+  .t-rows{ margin-top:14px; display:flex; flex-direction:column; gap:12px; }
+  .t-row{ display:flex; justify-content:space-between; gap:10px; }
+  .t-row .n{ font-weight:700; font-size:15px; }
+  .t-row .m{ font-family:'JetBrains Mono'; font-size:11.5px; color:var(--ink-faint); margin-top:2px; }
+  .t-row .p{ font-family:'JetBrains Mono'; font-weight:700; font-size:15px; color:var(--accent-deep); white-space:nowrap; }
+  .t-seg{ display:flex; background:var(--paper-sunken); border-radius:999px; padding:4px; margin-bottom:16px; }
+  .t-seg div{ flex:1; text-align:center; font-family:'JetBrains Mono'; font-size:12px; font-weight:700; padding:8px 0; border-radius:999px; color:var(--ink-faint); }
+  .t-seg div.on{ background:var(--paper-raised); color:var(--accent-deep); box-shadow:0 1px 3px rgba(0,0,0,0.12); }
   .zigzag{
-    height:14px; margin:0 -2px;
+    height:15px; margin:0 -2px;
     background:
-      linear-gradient(135deg, var(--paper) 50%, transparent 50%) 0 0/14px 14px repeat-x,
-      linear-gradient(-135deg, var(--paper) 50%, transparent 50%) 0 0/14px 14px repeat-x;
+      linear-gradient(135deg, var(--paper) 50%, transparent 50%) 0 0/15px 15px repeat-x,
+      linear-gradient(-135deg, var(--paper) 50%, transparent 50%) 0 0/15px 15px repeat-x;
   }
+  .ticket-caption{ font-family:'JetBrains Mono'; font-size:12.5px; color:var(--ink-faint); text-align:center; margin-top:14px; }
 
   /* ---------- section shell ---------- */
-  section{ padding-block:56px; border-top:1.5px solid var(--line); }
-  .section-head{ max-width:56ch; margin-bottom:34px; }
-  .section-head h2{ font-size:clamp(24px,3.4vw,32px); margin-top:10px; }
-  .section-head p{ margin-top:12px; color:var(--ink-soft); font-size:15.5px; }
+  section{ padding-block:48px; border-top:1.5px solid var(--line); }
+  .section-head{ margin-bottom:30px; }
+  .section-head h2{ font-size:clamp(25px,7vw,32px); margin-top:10px; }
+  .section-head p{ margin-top:12px; color:var(--ink-soft); font-size:16.5px; }
 
   /* ---------- problem ---------- */
-  .problem{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
-  .problem p{ color:var(--ink-soft); font-size:15.5px; max-width:48ch; }
+  .problem{
+    display:flex; flex-direction:column; gap:24px;
+    background:var(--paper-raised); border:2px solid var(--ink); border-radius:18px;
+    padding:24px 20px; box-shadow:var(--shadow);
+  }
+  .problem h2{ font-size:24px; }
+  .problem p{ color:var(--ink-soft); font-size:16px; }
   .problem p + p{ margin-top:14px; }
   .ledger{
-    background:
-      repeating-linear-gradient(var(--paper-raised), var(--paper-raised) 27px, var(--line) 28px);
-    border:2px solid var(--ink); border-radius:12px; padding:18px 20px; position:relative;
-    font-family:'JetBrains Mono'; font-size:12.5px; color:var(--ink-soft);
-    transform:rotate(-1.4deg);
+    background:repeating-linear-gradient(var(--paper-sunken), var(--paper-sunken) 29px, var(--line) 30px);
+    border:2px solid var(--ink); border-radius:12px; padding:18px 18px;
+    font-family:'JetBrains Mono'; font-size:14px; color:var(--ink-soft); line-height:2.1;
   }
   .ledger .strike{ text-decoration:line-through; text-decoration-color:var(--pink); text-decoration-thickness:2px; color:var(--ink-faint); }
   .ledger .fix{ color:var(--accent-deep); font-weight:700; }
 
   /* ---------- features ---------- */
-  .feature-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
-  .feature{
-    background:var(--paper-raised); border:2px solid var(--ink); border-radius:14px;
-    padding:20px; position:relative;
-  }
-  .feature svg{ width:26px; height:26px; stroke:var(--accent-deep); }
-  .feature h3{ font-size:16.5px; margin-top:14px; }
-  .feature p{ margin-top:8px; font-size:13.8px; color:var(--ink-soft); }
-  .feature .tag{
-    position:absolute; top:16px; right:16px;
-    font-family:'JetBrains Mono'; font-size:10px; color:var(--ink-faint);
-  }
+  .feature-grid{ display:flex; flex-direction:column; gap:16px; }
+  .feature{ background:var(--paper-raised); border:2px solid var(--ink); border-radius:16px; padding:22px; position:relative; }
+  .feature svg{ width:30px; height:30px; stroke:var(--accent-deep); }
+  .feature h3{ font-size:19px; margin-top:16px; }
+  .feature p{ margin-top:9px; font-size:15px; color:var(--ink-soft); }
+  .feature .tag{ position:absolute; top:20px; right:20px; font-family:'JetBrains Mono'; font-size:11px; color:var(--ink-faint); }
 
-  /* ---------- screens ---------- */
-  .roles{ display:flex; flex-direction:column; gap:52px; }
-  .role-row{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
-  .role-row.flip{ grid-template-columns:0.9fr 1.1fr; }
-  .role-row.flip .role-text{ order:2; }
-  .role-text h3{ font-size:21px; margin-top:10px; }
-  .role-text .who{ margin-top:16px; }
-  .role-text .who b{ font-family:'JetBrains Mono'; font-size:10.5px; text-transform:uppercase; letter-spacing:0.07em; color:var(--accent-deep); display:block; margin-bottom:4px; }
-  .role-text .who p{ font-size:14px; color:var(--ink-soft); }
-  .role-text .who + .who{ margin-top:14px; }
-  .role-phone-wrap{ display:flex; justify-content:center; }
-  .segctrl{ display:flex; background:var(--paper-sunken); border-radius:999px; padding:3px; margin-bottom:9px; }
-  .segctrl div{ flex:1; text-align:center; font-family:'JetBrains Mono'; font-size:8px; font-weight:700; padding:5px 0; border-radius:999px; color:var(--ink-faint); }
-  .segctrl div.on{ background:var(--paper-raised); color:var(--accent-deep); box-shadow:0 1px 3px rgba(0,0,0,0.12); }
-  .screens{ display:grid; grid-template-columns:repeat(2,1fr); gap:26px; justify-items:center; }
-  .phone{
-    width:230px; border:2.5px solid var(--ink); border-radius:26px; overflow:hidden;
-    background:var(--paper-sunken); box-shadow:var(--shadow);
-  }
-  .phone-bar{ background:var(--paper-raised); padding:12px 14px 9px; border-bottom:1.5px solid var(--line); text-align:center; }
-  .phone-greet{ font-size:9.5px; color:var(--ink-faint); }
-  .phone-name{ font-size:12px; font-weight:700; letter-spacing:0.02em; }
-  .phone-badge{
-    display:inline-block; margin-top:5px; font-family:'JetBrains Mono'; font-size:8px; font-weight:700;
-    background:var(--accent); color:#fff; padding:2px 8px; border-radius:8px;
-  }
-  .phone-body{ padding:11px; }
-  .phone-label{ font-family:'JetBrains Mono'; font-size:7.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:6px; }
-  .phone-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:10px; }
-  .phone-card{ background:var(--paper-raised); border:1.3px solid var(--line); border-radius:8px; padding:7px 8px; }
-  .phone-card .l{ font-size:7.5px; color:var(--ink-faint); }
-  .phone-card .v{ font-size:12px; font-weight:700; }
-  .phone-row{ display:flex; justify-content:space-between; align-items:center; background:var(--paper-raised); border:1.3px solid var(--line); border-radius:8px; padding:7px 9px; margin-bottom:5px; }
-  .phone-row .n{ font-size:9.5px; font-weight:700; }
-  .phone-row .m{ font-size:7.5px; color:var(--ink-faint); }
-  .phone-row .p{ font-size:10.5px; font-weight:700; color:var(--accent-deep); font-family:'JetBrains Mono'; }
-  .phone-tabs{ display:flex; background:var(--paper-raised); border-top:1.3px solid var(--line); padding:6px 0; }
-  .phone-tabs div{ flex:1; text-align:center; font-size:6.5px; color:var(--ink-faint); font-family:'JetBrains Mono'; }
-  .phone-tabs div.on{ color:var(--accent); font-weight:700; }
-  .phone-cash{ display:flex; align-items:center; gap:5px; background:var(--paper-sunken); border-radius:7px; padding:5px 8px; margin-bottom:8px; }
-  .phone-cash input{ pointer-events:none; }
-  .phone-cash span{ font-size:8px; color:var(--accent-deep); font-weight:600; }
-  .screen-label{ font-family:'JetBrains Mono'; font-size:11px; color:var(--ink-faint); margin-top:12px; text-align:center; }
+  /* ---------- roles ---------- */
+  .roles{ display:flex; flex-direction:column; gap:44px; }
+  .role-row{ display:flex; flex-direction:column; gap:22px; }
+  .role-text h3{ font-size:23px; margin-top:10px; }
+  .role-text .who{ margin-top:18px; }
+  .role-text .who b{ font-family:'JetBrains Mono'; font-size:11px; text-transform:uppercase; letter-spacing:0.07em; color:var(--accent-deep); display:block; margin-bottom:5px; }
+  .role-text .who p{ font-size:15.5px; color:var(--ink-soft); }
+  .role-text .who + .who{ margin-top:16px; }
 
   /* ---------- plans ---------- */
-  .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-  .plan{
-    background:var(--paper-raised); border:2px solid var(--ink); border-radius:14px; padding:22px 20px;
-    display:flex; flex-direction:column; gap:14px;
-  }
+  .plans{ display:flex; flex-direction:column; gap:18px; }
+  .plan{ background:var(--paper-raised); border:2px solid var(--ink); border-radius:16px; padding:24px 22px; display:flex; flex-direction:column; gap:15px; }
   .plan.pro{ border-color:var(--accent); box-shadow:var(--shadow); }
-  .plan-name{ font-family:'Bricolage Grotesque'; font-weight:800; font-size:17px; }
-  .plan-price{ font-family:'JetBrains Mono'; font-size:13px; color:var(--ink-soft); }
-  .plan ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; font-size:13.3px; }
+  .plan-name{ font-family:'Bricolage Grotesque'; font-weight:800; font-size:19px; }
+  .plan-price{ font-family:'JetBrains Mono'; font-size:14px; color:var(--ink-soft); }
+  .plan ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; font-size:15px; }
   .plan li{ display:flex; gap:8px; color:var(--ink-soft); }
   .plan li b{ color:var(--ink); font-weight:600; }
-  .plan-note{
-    margin-top:auto; font-family:'JetBrains Mono'; font-size:10.5px; color:var(--accent-deep);
-    background:var(--paper-sunken); border-radius:8px; padding:8px 10px;
-  }
+  .plan-note{ margin-top:auto; font-family:'JetBrains Mono'; font-size:11.5px; color:var(--accent-deep); background:var(--paper-sunken); border-radius:9px; padding:9px 11px; }
 
   /* ---------- cta ---------- */
   .cta-box{
-    background:var(--ink); color:var(--paper);
-    border-radius:20px; padding:40px 34px;
-    display:grid; grid-template-columns:1.2fr 0.8fr; gap:30px; align-items:center;
-    position:relative; overflow:hidden;
+    background:var(--ink); color:var(--paper); border-radius:22px; padding:32px 24px;
+    display:flex; flex-direction:column; gap:26px; position:relative; overflow:hidden;
   }
-  .cta-box::before{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(120deg, var(--yellow) 0%, var(--pink) 45%, var(--accent) 100%);
-    opacity:0.14;
-  }
+  .cta-box::before{ content:""; position:absolute; inset:0; background:linear-gradient(120deg, var(--yellow) 0%, var(--pink) 45%, var(--accent) 100%); opacity:0.14; }
   .cta-box > *{ position:relative; }
   .cta-box .eyebrow{ color:var(--yellow); }
-  .cta-box h2{ color:var(--paper); font-size:clamp(22px,3vw,30px); margin-top:10px; }
-  .cta-box p{ color:#D8CEEE; margin-top:12px; font-size:14.5px; max-width:44ch; }
-  .cta-steps{ display:flex; flex-direction:column; gap:12px; font-family:'JetBrains Mono'; font-size:12.5px; }
+  .cta-box h2{ color:var(--paper); font-size:clamp(23px,6vw,30px); margin-top:10px; }
+  .cta-box p{ color:#D8CEEE; margin-top:12px; font-size:16px; }
+  .cta-steps{ display:flex; flex-direction:column; gap:13px; font-family:'JetBrains Mono'; font-size:13.5px; }
   .cta-steps div{ display:flex; gap:10px; align-items:baseline; }
   .cta-steps b{ color:var(--yellow); }
-  .cta-box .btn-primary{ background:var(--paper); color:var(--ink); border-color:var(--paper); margin-top:18px; display:inline-block; }
+  .cta-box .btn-primary{ background:var(--paper); color:var(--ink); border-color:var(--paper); margin-top:6px; }
 
   /* ---------- footer ---------- */
   footer{
-    padding-block:30px 40px; border-top:1.5px solid var(--line);
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
-    font-family:'JetBrains Mono'; font-size:12px; color:var(--ink-faint);
+    padding-block:28px 36px; border-top:1.5px solid var(--line);
+    display:flex; flex-direction:column; gap:10px;
+    font-family:'JetBrains Mono'; font-size:12.5px; color:var(--ink-faint);
   }
   footer a{ color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; }
 
-  @media (max-width:760px){
-    header{ flex-wrap:wrap; gap:12px; }
-    section{ padding-block:44px; }
-    .section-head p{ font-size:16px; }
+  /* ===================================================================
+     Desktop enhancement — widen into columns, add flourish. Never shrinks
+     the mobile type scale set above.
+     =================================================================== */
+  @media (min-width:760px){
+    header{ flex-wrap:nowrap; }
+    .hero{ flex-direction:row; align-items:center; padding-block:44px 60px; }
+    .hero > *:first-child{ flex:1.05; }
+    .hero > *:last-child{ flex:0.95; }
+    .hero p.lead{ max-width:46ch; }
+    .hero-ctas{ flex-direction:row; align-items:center; }
+    .btn-primary{ display:inline-block; }
+    .btn-ghost{ align-self:auto; }
 
-    .hero{ grid-template-columns:1fr; padding-block:20px 36px; gap:30px; }
-    .hero p.lead{ font-size:17.5px; max-width:none; }
-    .hero-ctas{ flex-direction:column; align-items:stretch; }
-    .btn-primary{ text-align:center; font-size:17px; padding:16px 22px; }
-    .btn-ghost{ text-align:center; }
+    .ticket{ transform:rotate(1.6deg); }
+    .ledger{ transform:rotate(-1.2deg); }
 
-    /* problem becomes one big bordered block */
-    .problem{
-      grid-template-columns:1fr; gap:20px;
-      background:var(--paper-raised); border:2px solid var(--ink); border-radius:18px;
-      padding:24px 20px; box-shadow:var(--shadow);
-    }
-    .problem h2{ font-size:23px; }
-    .problem p{ font-size:16px; max-width:none; }
-    .ledger{ transform:none; font-size:14px; padding:18px; }
+    .problem{ flex-direction:row; align-items:center; background:none; border:none; box-shadow:none; padding:0; gap:44px; }
+    .problem > *:first-child{ flex:1.1; }
+    .problem > *:last-child{ flex:0.9; }
 
-    .feature-grid{ grid-template-columns:1fr; gap:16px; }
-    .feature{ padding:22px; }
-    .feature svg{ width:30px; height:30px; }
-    .feature h3{ font-size:18.5px; margin-top:16px; }
-    .feature p{ font-size:15px; margin-top:10px; }
+    .feature-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
 
-    /* each role becomes one big bordered block, text + phone together */
-    .roles{ gap:26px; }
-    .role-row, .role-row.flip{
-      grid-template-columns:1fr; gap:24px;
-      background:var(--paper-raised); border:2px solid var(--ink); border-radius:18px;
-      padding:24px 20px; box-shadow:var(--shadow);
-    }
-    .role-row.flip .role-text{ order:0; }
-    .role-text h3{ font-size:22px; }
-    .role-text .who p{ font-size:15.5px; }
-    .role-phone-wrap{ margin-top:4px; }
-    .phone{ width:100%; max-width:280px; }
-    .phone-greet{ font-size:11px; }
-    .phone-name{ font-size:14px; }
-    .phone-badge{ font-size:9.5px; padding:3px 10px; }
-    .phone-body{ padding:14px; }
-    .phone-label{ font-size:9px; margin-bottom:8px; }
-    .phone-grid{ gap:8px; margin-bottom:12px; }
-    .phone-card{ padding:9px 10px; }
-    .phone-card .l{ font-size:9px; }
-    .phone-card .v{ font-size:15px; }
-    .phone-row{ padding:9px 11px; margin-bottom:7px; }
-    .phone-row .n{ font-size:12px; }
-    .phone-row .m{ font-size:9px; }
-    .phone-row .p{ font-size:13px; }
-    .phone-tabs div{ font-size:8.5px; }
-    .segctrl div{ font-size:9px; padding:6px 0; }
-    .screen-label{ font-size:12.5px; margin-top:14px; }
+    .roles{ gap:64px; }
+    .role-row{ flex-direction:row; align-items:center; gap:44px; }
+    .role-row > .role-text{ flex:1.1; }
+    .role-row > .ticket{ flex:0.9; }
+    .role-row.flip{ flex-direction:row-reverse; }
 
-    .plans{ grid-template-columns:1fr; gap:18px; }
-    .plan{ padding:26px 22px; }
-    .plan-name{ font-size:19px; }
-    .plan-price{ font-size:14.5px; }
-    .plan ul{ font-size:15px; gap:11px; }
+    .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
 
-    .cta-box{ grid-template-columns:1fr; padding:28px 22px; }
-    .cta-box h2{ font-size:24px; }
-    .cta-box p{ font-size:15.5px; max-width:none; }
-    .cta-steps{ font-size:13.5px; }
+    .cta-box{ flex-direction:row; align-items:center; padding:44px 40px; }
+    .cta-box > *:first-child{ flex:1.2; }
+    .cta-box > *:last-child{ flex:0.8; }
 
-    footer{ flex-direction:column; align-items:flex-start; }
+    footer{ flex-direction:row; justify-content:space-between; align-items:center; }
   }
 </style>
 
@@ -371,7 +263,7 @@
   <a class="nav-cta" href="#rejoindre">Rejoindre le test →</a>
 </header>
 
-<section class="hero" style="border-top:none; padding-top:8px;">
+<section class="hero" style="border-top:none;">
   <div>
     <span class="stamp eyebrow">● Test fermé · Android</span>
     <h1>Chaque vente, sa <span class="underline">bonne commission.</span></h1>
@@ -381,44 +273,42 @@
       <a class="btn-ghost" href="#comment-ca-marche">Voir comment ça marche</a>
     </div>
   </div>
-  <div class="receipt-wrap">
-    <div>
-      <div class="receipt">
-        <div class="receipt-head">
-          <div class="receipt-title">REÇU DE VENTE</div>
-          <div class="receipt-sub">Boutique Lamartine</div>
-        </div>
-        <hr>
-        <div class="r-line">
-          <div class="r-row"><span>Collier argent plaqué or</span><span class="mono">45,00 €</span></div>
-          <div class="r-meta"><span>Sophie · Carte · comm. 25%</span><span>−11,25 €</span></div>
-          <div class="r-total"><span>Net créatrice</span><span class="r-net">33,75 €</span></div>
-        </div>
-        <hr>
-        <div class="r-line">
-          <div class="r-row"><span>Bracelet perles</span><span class="mono">35,00 €</span></div>
-          <div class="r-meta"><span>Sophie · Espèces · 0% forcé</span><span>−0,00 €</span></div>
-          <div class="r-total"><span>Net créatrice</span><span class="r-net">35,00 €</span></div>
-        </div>
+  <div>
+    <div class="ticket">
+      <div class="ticket-head">
+        <div class="ticket-title">REÇU DE VENTE</div>
+        <div class="ticket-meta">Boutique Lamartine</div>
       </div>
-      <div class="zigzag"></div>
+      <hr>
+      <div>
+        <div class="t-row"><div class="n">Collier argent plaqué or</div><div class="p mono">45,00 €</div></div>
+        <div class="t-row"><div class="m">Sophie · Carte · comm. 25% → −11,25 €</div></div>
+        <div class="t-row" style="margin-top:4px;"><div class="n" style="color:var(--accent-deep);">Net créatrice</div><div class="p">33,75 €</div></div>
+      </div>
+      <hr>
+      <div>
+        <div class="t-row"><div class="n">Bracelet perles</div><div class="p mono">35,00 €</div></div>
+        <div class="t-row"><div class="m">Sophie · Espèces · 0% forcé → −0,00 €</div></div>
+        <div class="t-row" style="margin-top:4px;"><div class="n" style="color:var(--accent-deep);">Net créatrice</div><div class="p">35,00 €</div></div>
+      </div>
     </div>
+    <div class="zigzag"></div>
   </div>
 </section>
 
 <section class="problem">
   <div>
     <span class="eyebrow">Avant Encaissly</span>
-    <h2 style="margin-top:10px; font-size:26px;">Le calcul de commission, à la main, tous les soirs.</h2>
+    <h2 style="margin-top:10px;">Le calcul de commission, à la main, tous les soirs.</h2>
     <p>Trois créatrices sur le même comptoir, trois taux de commission différents, des espèces que certaines ne commissionnent pas — et tout ça recopié le soir dans un tableur, en espérant ne pas se tromper de ligne.</p>
     <p>Encaissly fait ce calcul au moment de la vente, pour chaque créatrice, sur chaque mode de paiement — et le garde, modifiable si tu te trompes de prix ou de nom.</p>
   </div>
   <div class="ledger">
-    Collier argent .......... 45,00€ <span class="strike">× 0,20</span> <span class="fix">× 0,25 ✓</span><br>
-    Bracelet perles .......... 35,00€ <span class="strike">× 0,25</span> <span class="fix">esp. 0% ✓</span><br>
-    Boucle dorée .......... 22,00€ <span class="strike">× ???</span> <span class="fix">× 0,25 ✓</span><br>
+    Collier argent .. 45€ <span class="strike">×0,20</span> <span class="fix">×0,25 ✓</span><br>
+    Bracelet perles .. 35€ <span class="strike">×0,25</span> <span class="fix">esp. 0% ✓</span><br>
+    Boucle dorée .. 22€ <span class="strike">×???</span> <span class="fix">×0,25 ✓</span><br>
     <br>
-    Total créatrice .......... <span class="fix">102,00€ net</span>
+    Total .. <span class="fix">102€ net</span>
   </div>
 </section>
 
@@ -481,30 +371,24 @@
           <p>Tu crées un événement (dates de début et de fin), tu y ajoutes ton stock article par article, et tu retrouves ensuite tes ventes filtrées pour cet événement précis — séparément de tes ventes en boutique.</p>
         </div>
       </div>
-      <div class="role-phone-wrap">
-        <div>
-          <div class="phone">
-            <div class="phone-bar">
-              <div class="phone-greet">Marché de Noël 🏷️</div>
-              <div class="phone-name">SOPHIE MARTIN</div>
-              <span class="phone-badge">14 → 15 déc.</span>
-            </div>
-            <div class="phone-body">
-              <div class="phone-label">Bilan de l'événement</div>
-              <div class="phone-grid">
-                <div class="phone-card"><div class="l">Ventes</div><div class="v">9</div></div>
-                <div class="phone-card"><div class="l">CA</div><div class="v">265 €</div></div>
-              </div>
-              <div class="phone-label">Stock restant</div>
-              <div class="phone-row"><div><div class="n">Collier argent</div><div class="m">apporté : 12</div></div><div class="p">3 restants</div></div>
-              <div class="phone-row"><div><div class="n">Bracelet perles</div><div class="m">apporté : 8</div></div><div class="p" style="color:var(--pink);">épuisé</div></div>
-            </div>
-            <div class="phone-tabs">
-              <div>Dashboard</div><div>Ventes</div><div class="on">Événements</div><div>Stats</div>
-            </div>
+      <div>
+        <div class="ticket">
+          <div class="ticket-head">
+            <div class="ticket-title">MARCHÉ DE NOËL</div>
+            <div class="ticket-meta">14 → 15 déc.</div>
           </div>
-          <div class="screen-label">Fiche événement — stock &amp; ventes</div>
+          <hr>
+          <div class="t-stats">
+            <div class="t-stat"><div class="lbl">Ventes</div><div class="num">9</div></div>
+            <div class="t-stat"><div class="lbl">CA</div><div class="num">265 €</div></div>
+          </div>
+          <div class="t-rows">
+            <div class="t-row"><div><div class="n">Collier argent</div><div class="m">apporté : 12</div></div><div class="p">3 restants</div></div>
+            <div class="t-row"><div><div class="n">Bracelet perles</div><div class="m">apporté : 8</div></div><div class="p" style="color:var(--pink);">épuisé</div></div>
+          </div>
         </div>
+        <div class="zigzag"></div>
+        <div class="ticket-caption">Fiche événement — stock &amp; ventes</div>
       </div>
     </div>
 
@@ -521,32 +405,26 @@
           <p>Tu ajoutes chaque créatrice avec son taux, tu suis le CA global et le détail par créatrice, et tu exportes en PDF, Excel ou CSV.</p>
         </div>
       </div>
-      <div class="role-phone-wrap">
-        <div>
-          <div class="phone">
-            <div class="phone-bar">
-              <div class="phone-greet">Bonjour 👋</div>
-              <div class="phone-name">MARIE DUPONT</div>
-              <span class="phone-badge">GÉRANTE · PRO</span>
-            </div>
-            <div class="phone-body">
-              <div class="phone-label">Boutique Lamartine</div>
-              <div class="phone-grid">
-                <div class="phone-card"><div class="l">CA boutique</div><div class="v">850 €</div></div>
-                <div class="phone-card"><div class="l">Ventes</div><div class="v">18</div></div>
-                <div class="phone-card"><div class="l">Commissions</div><div class="v">212 €</div></div>
-                <div class="phone-card"><div class="l">Créatrices</div><div class="v">4</div></div>
-              </div>
-              <div class="phone-label">Dernières ventes</div>
-              <div class="phone-row"><div><div class="n">Boucle dorée</div><div class="m">Sophie · Carte</div></div><div class="p">45 €</div></div>
-              <div class="phone-row"><div><div class="n">Collier argent</div><div class="m">Léa · Espèces</div></div><div class="p">80 €</div></div>
-            </div>
-            <div class="phone-tabs">
-              <div class="on">Dashboard</div><div>Ventes</div><div>Créatrices</div><div>Stats</div>
-            </div>
+      <div>
+        <div class="ticket">
+          <div class="ticket-head">
+            <div class="ticket-title">BOUTIQUE LAMARTINE</div>
+            <div class="ticket-meta">Ce mois-ci</div>
           </div>
-          <div class="screen-label">Dashboard gérante</div>
+          <hr>
+          <div class="t-stats">
+            <div class="t-stat"><div class="lbl">CA boutique</div><div class="num">850 €</div></div>
+            <div class="t-stat"><div class="lbl">Ventes</div><div class="num">18</div></div>
+            <div class="t-stat"><div class="lbl">Commissions</div><div class="num">212 €</div></div>
+            <div class="t-stat"><div class="lbl">Créatrices</div><div class="num">4</div></div>
+          </div>
+          <div class="t-rows">
+            <div class="t-row"><div><div class="n">Boucle dorée</div><div class="m">Sophie · Carte</div></div><div class="p">45 €</div></div>
+            <div class="t-row"><div><div class="n">Collier argent</div><div class="m">Léa · Espèces</div></div><div class="p">80 €</div></div>
+          </div>
         </div>
+        <div class="zigzag"></div>
+        <div class="ticket-caption">Dashboard gérante</div>
       </div>
     </div>
 
@@ -567,32 +445,27 @@
           <p>En vue créatrice, tu es une créatrice comme les autres : tu peux créer tes propres événements (marché, salon) avec leur stock, et tu suis tes ventes faites dans ta propre boutique — en plus de la piloter côté gérante.</p>
         </div>
       </div>
-      <div class="role-phone-wrap">
-        <div>
-          <div class="phone">
-            <div class="phone-bar">
-              <div class="phone-greet">Bonjour 👋</div>
-              <div class="phone-name">CAMILLE ROUX</div>
-              <span class="phone-badge">GÉRANTE + CRÉATRICE · DUO</span>
-            </div>
-            <div class="phone-body">
-              <div class="segctrl"><div>Vue gérante</div><div class="on">Vue créatrice</div></div>
-              <div class="phone-label">Tes ventes ce mois-ci</div>
-              <div class="phone-grid">
-                <div class="phone-card"><div class="l">CA</div><div class="v">610 €</div></div>
-                <div class="phone-card"><div class="l">Ventes</div><div class="v">14</div></div>
-                <div class="phone-card"><div class="l">Commission</div><div class="v">0 €</div></div>
-                <div class="phone-card"><div class="l">Net</div><div class="v">610 €</div></div>
-              </div>
-              <div class="phone-row"><div><div class="n">Boucle d'oreille</div><div class="m">Carte</div></div><div class="p">28 €</div></div>
-              <div class="phone-row"><div><div class="n">Sac tissé</div><div class="m">Espèces</div></div><div class="p">55 €</div></div>
-            </div>
-            <div class="phone-tabs">
-              <div class="on">Dashboard</div><div>Ventes</div><div>Créatrices</div><div>Stats</div>
-            </div>
+      <div>
+        <div class="ticket">
+          <div class="ticket-head">
+            <div class="ticket-title">CAMILLE ROUX</div>
+            <div class="ticket-meta">DUO</div>
           </div>
-          <div class="screen-label">Dashboard DUO — vue créatrice active</div>
+          <hr>
+          <div class="t-seg"><div>Vue gérante</div><div class="on">Vue créatrice</div></div>
+          <div class="t-stats">
+            <div class="t-stat"><div class="lbl">CA</div><div class="num">610 €</div></div>
+            <div class="t-stat"><div class="lbl">Ventes</div><div class="num">14</div></div>
+            <div class="t-stat"><div class="lbl">Commission</div><div class="num">0 €</div></div>
+            <div class="t-stat"><div class="lbl">Net</div><div class="num">610 €</div></div>
+          </div>
+          <div class="t-rows">
+            <div class="t-row"><div><div class="n">Boucle d'oreille</div><div class="m">Carte</div></div><div class="p">28 €</div></div>
+            <div class="t-row"><div><div class="n">Sac tissé</div><div class="m">Espèces</div></div><div class="p">55 €</div></div>
+          </div>
         </div>
+        <div class="zigzag"></div>
+        <div class="ticket-caption">Dashboard DUO — vue créatrice active</div>
       </div>
     </div>
 
